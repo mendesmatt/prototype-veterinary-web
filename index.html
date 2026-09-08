@@ -8,151 +8,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          warm: '#FAFAFA',
-          mint: '#4FD1C5',
-          sky2: '#63B3ED',
-          act:  '#F6AD55',
-          ink:  '#2D3748',
-          sub:  '#718096'
-        },
-        fontFamily: { sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'] }
-      }
-    }
-  }
-</script>
-<style>
-  html, body { height: 100%; }
-  body {
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background:
-      radial-gradient(1200px 600px at 20% 0%, #e6fbf8 0%, transparent 55%),
-      radial-gradient(1000px 600px at 90% 100%, #eaf4ff 0%, transparent 55%),
-      #eef1f5;
-    /* container pai com overflow flexível para nunca amassar a moldura */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 24px;
-    box-sizing: border-box;
-    overflow: auto;
-  }
-
-  /* Moldura do smartphone travada em 375x750 */
-  .phone {
-    position: relative;
-    width: 375px;
-    height: 750px;
-    flex: 0 0 auto;
-    background: #FAFAFA;
-    border-radius: 44px;
-    box-shadow:
-      0 0 0 11px #111827,
-      0 0 0 13px #1f2937,
-      0 30px 60px -12px rgba(17,24,39,.45);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Notch */
-  .notch {
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 150px; height: 26px;
-    background: #111827;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    z-index: 40;
-  }
-
-  .statusbar {
-    height: 44px;
-    padding: 0 26px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: 700;
-    color: #2D3748;
-    flex: 0 0 auto;
-  }
-
-  .screen {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-  }
-  .screen::-webkit-scrollbar { width: 0; height: 0; }
-  .no-scroll::-webkit-scrollbar { width: 0; height: 0; }
-  .no-scroll { scrollbar-width: none; }
-  .screen { scrollbar-width: none; }
-
-  /* Animação de troca de aba */
-  .panel { display: none; }
-  .panel.active { display: block; animation: fadeUp .35s cubic-bezier(.22,.61,.36,1); }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .nav-ico { transition: transform .25s ease, color .25s ease; }
-  .nav-btn.active .nav-ico { transform: translateY(-3px); }
-  .nav-btn.active .nav-label { color: #4FD1C5; }
-
-  .badge-pop { animation: pop .3s ease; }
-  @keyframes pop { 0%{transform:scale(.5)} 60%{transform:scale(1.25)} 100%{transform:scale(1)} }
-
-  .sheet { transition: transform .35s cubic-bezier(.22,.61,.36,1); }
-  .fade-layer { transition: opacity .3s ease; }
-
-  .chip { transition: all .18s ease; }
-  .chip.sel { background:#4FD1C5; color:#fff; border-color:#4FD1C5; box-shadow:0 6px 14px -4px rgba(79,209,197,.6); }
-  .time.sel { background:#63B3ED; color:#fff; border-color:#63B3ED; box-shadow:0 6px 14px -4px rgba(99,179,237,.6); }
-
-  .card-soft { box-shadow: 0 8px 24px -14px rgba(45,55,72,.28); }
-  .hide-scroll::-webkit-scrollbar { display:none; }
-  .hide-scroll { scrollbar-width:none; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .panel.active { animation: none; }
-    .sheet, .fade-layer, .nav-ico { transition: none; }
-  }
-</style>
+<script src="js/tailwind.config.js"></script>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div class="phone" id="phone">
   <div class="notch"></div>
 
-  <!-- Status bar -->
   <div class="statusbar">
     <span id="clock">9:41</span>
     <div class="flex items-center gap-1.5">
-      <!-- signal -->
       <svg width="17" height="12" viewBox="0 0 17 12" fill="#2D3748"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="4.5" y="5.5" width="3" height="6.5" rx="1"/><rect x="9" y="3" width="3" height="9" rx="1"/><rect x="13.5" y="0.5" width="3" height="11.5" rx="1"/></svg>
-      <!-- wifi -->
       <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#2D3748" stroke-width="1.6" stroke-linecap="round"><path d="M1 4.2C4.9 1 11.1 1 15 4.2"/><path d="M3.4 6.8C6 4.7 10 4.7 12.6 6.8"/><path d="M5.8 9.3C7 8.4 9 8.4 10.2 9.3"/><circle cx="8" cy="11" r=".9" fill="#2D3748" stroke="none"/></svg>
-      <!-- battery -->
       <svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x="1" y="1" width="21" height="11" rx="3" stroke="#2D3748" stroke-width="1.2"/><rect x="2.8" y="2.8" width="16" height="7.4" rx="1.6" fill="#2D3748"/><rect x="23" y="4.2" width="2" height="4.6" rx="1" fill="#2D3748"/></svg>
     </div>
   </div>
 
-  <!-- SCREEN -->
   <div class="screen" id="screen">
 
-    <!-- ============ ABA 1: MEU PET ============ -->
     <section class="panel active px-5 pt-2 pb-28" data-panel="pet">
-      <!-- Cabeçalho -->
       <header class="flex items-center justify-between mt-1">
         <div>
           <p class="text-sub text-sm">Bem-vinda de volta</p>
@@ -164,7 +39,6 @@
         </button>
       </header>
 
-      <!-- Card do pet ativo -->
       <div class="mt-5 rounded-3xl p-5 text-white card-soft relative overflow-hidden"
            style="background:linear-gradient(135deg,#4FD1C5 0%,#38b2ac 100%)">
         <div class="absolute -right-8 -top-10 w-40 h-40 rounded-full bg-white/10"></div>
@@ -184,7 +58,6 @@
             </div>
           </div>
         </div>
-        <!-- Seletor de pets -->
         <div class="flex items-center gap-2 mt-4 relative">
           <span class="text-[12px] text-white/85 font-medium mr-1">Trocar pet</span>
           <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=80&q=80" style="background:#e6fbf8" class="w-8 h-8 rounded-full object-cover ring-2 ring-white cursor-pointer">
@@ -195,7 +68,6 @@
         </div>
       </div>
 
-      <!-- Ações rápidas -->
       <div class="grid grid-cols-2 gap-3 mt-5">
         <button class="schedule-btn flex items-center justify-center gap-2 rounded-2xl py-3.5 text-white font-bold text-sm card-soft active:scale-95 transition"
                 data-title="Agendar Consulta" style="background:linear-gradient(135deg,#F6AD55,#ed8936)">
@@ -208,7 +80,6 @@
         </button>
       </div>
 
-      <!-- Linha do tempo de saúde -->
       <div class="mt-7">
         <div class="flex items-center justify-between mb-3">
           <h3 class="font-bold text-ink" style="color:#38b2ac">Linha do tempo de saúde</h3>
@@ -251,12 +122,10 @@
       </div>
     </section>
 
-    <!-- ============ ABA 2: VACINAS ============ -->
     <section class="panel px-5 pt-2 pb-28" data-panel="vacinas">
       <h1 class="text-ink text-2xl font-extrabold mt-1">Carteira de vacinação</h1>
       <p class="text-sub text-sm mt-0.5">Ciclo anual do Max</p>
 
-      <!-- Progresso do ciclo -->
       <div class="mt-4 bg-white rounded-3xl p-5 card-soft">
         <div class="flex items-center justify-between mb-2">
           <span class="font-bold text-ink text-sm">Ciclo vacinal 2025</span>
@@ -268,7 +137,6 @@
         <p class="text-xs text-sub mt-2">4 de 6 doses do calendário concluídas</p>
       </div>
 
-      <!-- Destaque: próxima obrigatória -->
       <div class="mt-4 rounded-3xl p-5 card-soft relative overflow-hidden"
            style="background:linear-gradient(135deg,#F6AD55,#ed8936)">
         <div class="absolute -right-6 -bottom-8 w-32 h-32 rounded-full bg-white/10"></div>
@@ -284,7 +152,6 @@
         </button>
       </div>
 
-      <!-- Próximas vacinas -->
       <h3 class="font-bold mt-6 mb-3" style="color:#38b2ac">Próximas vacinas</h3>
       <div class="space-y-3">
         <div class="bg-white rounded-2xl px-4 py-3.5 flex items-center gap-3 card-soft">
@@ -309,7 +176,6 @@
         </div>
       </div>
 
-      <!-- Aplicadas -->
       <h3 class="font-bold mt-6 mb-3" style="color:#38b2ac">Vacinas aplicadas</h3>
       <div class="space-y-3">
         <div class="bg-white rounded-2xl px-4 py-3.5 flex items-center gap-3 card-soft">
@@ -345,12 +211,10 @@
       </div>
     </section>
 
-    <!-- ============ ABA 3: PLANO VETCARE ============ -->
     <section class="panel px-5 pt-2 pb-28" data-panel="plano">
       <h1 class="text-ink text-2xl font-extrabold mt-1">Plano VetCare</h1>
       <p class="text-sub text-sm mt-0.5">Saúde &amp; benefícios do Max</p>
 
-      <!-- Carteirinha digital -->
       <div class="mt-4 rounded-3xl p-5 text-white card-soft relative overflow-hidden"
            style="background:linear-gradient(135deg,#63B3ED 0%,#4FD1C5 100%)">
         <div class="absolute -right-10 -top-12 w-44 h-44 rounded-full bg-white/10"></div>
@@ -379,7 +243,6 @@
         </div>
       </div>
 
-      <!-- Resumo de cobertura -->
       <div class="flex items-center justify-between mt-6 mb-3">
         <h3 class="font-bold" style="color:#38b2ac">Resumo de cobertura</h3>
         <span class="text-xs text-sub">Renova em 32 dias</span>
@@ -431,7 +294,6 @@
         </div>
       </div>
 
-      <!-- Ações -->
       <button class="mt-5 w-full bg-white text-sky2 border-2 border-sky2/25 font-bold text-sm rounded-2xl py-3.5 card-soft active:scale-95 transition">
         Ver cobertura completa
       </button>
@@ -441,7 +303,6 @@
       </button>
     </section>
 
-    <!-- ============ ABA 4: PET SHOP ============ -->
     <section class="panel px-5 pt-2 pb-28" data-panel="shop">
       <header class="flex items-center justify-between mt-1">
         <div>
@@ -454,7 +315,6 @@
         </button>
       </header>
 
-      <!-- Meus itens recorrentes -->
       <div class="mt-5">
         <div class="flex items-center gap-2 mb-3">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#38b2ac" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
@@ -490,11 +350,9 @@
         </div>
       </div>
 
-      <!-- Produtos -->
       <h3 class="font-bold mt-6 mb-3" style="color:#38b2ac">Recomendados para o Max</h3>
       <div class="grid grid-cols-2 gap-3.5" id="product-grid">
 
-        <!-- Card produto -->
         <div class="bg-white rounded-2xl p-3 card-soft flex flex-col">
           <div class="rounded-xl overflow-hidden h-24 mb-2.5" style="background:#eef1f5">
             <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
@@ -566,11 +424,9 @@
       </div>
     </section>
 
-    <!-- ============ ABA 5: PERFIL ============ -->
     <section class="panel px-5 pt-2 pb-28" data-panel="perfil">
       <h1 class="text-ink text-2xl font-extrabold mt-1">Perfil</h1>
 
-      <!-- Tutor -->
       <div class="mt-4 bg-white rounded-3xl p-5 card-soft flex items-center gap-4">
         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80" style="background:#eef1f5" class="w-16 h-16 rounded-full object-cover ring-4 ring-mint/20">
         <div class="flex-1">
@@ -580,7 +436,6 @@
         </div>
       </div>
 
-      <!-- Carteira de cartões -->
       <h3 class="font-bold mt-6 mb-3" style="color:#38b2ac">Cartões para recorrência</h3>
       <div class="space-y-3">
         <div class="bg-white rounded-2xl px-4 py-3.5 flex items-center gap-3 card-soft">
@@ -603,7 +458,6 @@
         </button>
       </div>
 
-      <!-- Menu -->
       <h3 class="font-bold mt-6 mb-3" style="color:#38b2ac">Conta</h3>
       <div class="bg-white rounded-2xl card-soft overflow-hidden">
         <button onclick="toast('Histórico de pagamentos')" class="w-full flex items-center gap-3 px-4 py-3.5 border-b border-gray-50 active:bg-gray-50 transition">
@@ -626,10 +480,7 @@
       <button onclick="toast('Até logo, Helena 🐾')" class="mt-4 w-full text-center text-sm font-bold text-act py-3">Sair da conta</button>
     </section>
 
-  </div><!-- /screen -->
-
-  <!-- ============ BOTTOM NAV ============ -->
-  <nav class="flex-none bg-white border-t border-gray-100 px-2 pt-2 pb-3 flex items-stretch justify-between relative z-30" style="box-shadow:0 -6px 20px -12px rgba(45,55,72,.2)">
+  </div><nav class="flex-none bg-white border-t border-gray-100 px-2 pt-2 pb-3 flex items-stretch justify-between relative z-30" style="box-shadow:0 -6px 20px -12px rgba(45,55,72,.2)">
     <button class="nav-btn active flex-1 flex flex-col items-center gap-1 py-1" data-tab="pet">
       <span class="nav-ico">
         <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#4FD1C5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 0-4.7 6.5c.4 1.2 1.6 2 2.9 2s2.5-.8 3.6-.8 2.3.8 3.6.8 2.5-.8 2.9-2A5 5 0 0 0 9 10Z"/></svg>
@@ -667,7 +518,6 @@
     </button>
   </nav>
 
-  <!-- ============ MODAL AGENDAMENTO ============ -->
   <div id="sched-overlay" class="fade-layer opacity-0 pointer-events-none absolute inset-0 bg-black/40 z-50 flex items-end">
     <div id="sched-sheet" class="sheet translate-y-full w-full bg-white rounded-t-3xl p-5 pb-7">
       <div class="w-10 h-1.5 rounded-full bg-gray-200 mx-auto mb-4"></div>
@@ -703,7 +553,6 @@
     </div>
   </div>
 
-  <!-- ============ DRAWER CARRINHO ============ -->
   <div id="cart-overlay" class="fade-layer opacity-0 pointer-events-none absolute inset-0 bg-black/40 z-50 flex items-end">
     <div id="cart-sheet" class="sheet translate-y-full w-full bg-white rounded-t-3xl p-5 pb-7 max-h-[85%] flex flex-col">
       <div class="w-10 h-1.5 rounded-full bg-gray-200 mx-auto mb-4"></div>
@@ -733,194 +582,10 @@
     </div>
   </div>
 
-  <!-- Toast -->
   <div id="toast" class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-24 z-[60] opacity-0 transition-all duration-300">
     <div class="bg-ink text-white text-sm font-semibold px-4 py-2.5 rounded-2xl shadow-lg whitespace-nowrap"></div>
   </div>
 
-</div><!-- /phone -->
-
-<script>
-/* ---------- Relógio da status bar ---------- */
-function tick(){
-  const d = new Date();
-  const h = d.getHours(), m = String(d.getMinutes()).padStart(2,'0');
-  document.getElementById('clock').textContent = h + ':' + m;
-}
-tick(); setInterval(tick, 15000);
-
-/* ---------- Troca de abas ---------- */
-const navBtns = document.querySelectorAll('.nav-btn');
-const panels  = document.querySelectorAll('.panel');
-const screen  = document.getElementById('screen');
-
-function activateIcon(btn, on){
-  const svg = btn.querySelector('.nav-ico svg');
-  if(svg) svg.setAttribute('stroke', on ? '#4FD1C5' : '#A0AEC0');
-}
-
-function switchTab(tab){
-  navBtns.forEach(b=>{
-    const on = b.dataset.tab === tab;
-    b.classList.toggle('active', on);
-    activateIcon(b, on);
-  });
-  panels.forEach(p=>{
-    const on = p.dataset.panel === tab;
-    p.classList.toggle('active', on);
-  });
-  screen.scrollTo({top:0, behavior:'smooth'});
-}
-navBtns.forEach(b=> b.addEventListener('click', ()=> switchTab(b.dataset.tab)));
-
-/* ---------- Carrinho ---------- */
-const cart = [];              // {name, type, price(number)}
-const bagBadge = document.getElementById('bag-badge');
-const navBadge = document.getElementById('nav-badge');
-
-function parseBRL(s){ return parseFloat(s.replace('.','').replace(',','.')); }
-function fmtBRL(n){ return 'R$ ' + n.toFixed(2).replace('.',','); }
-
-function updateBadges(){
-  const n = cart.length;
-  [bagBadge, navBadge].forEach(el=>{
-    if(n>0){
-      el.textContent = n;
-      el.classList.remove('hidden');
-      el.classList.remove('badge-pop'); void el.offsetWidth; el.classList.add('badge-pop');
-    } else {
-      el.classList.add('hidden');
-    }
-  });
-}
-
-document.querySelectorAll('.add-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    cart.push({
-      name: btn.dataset.name,
-      type: btn.dataset.type === 'assinatura' ? 'Assinatura -15%' : 'Compra única',
-      price: parseBRL(btn.dataset.price)
-    });
-    updateBadges();
-    toast(btn.dataset.name + ' na sacola 🛒');
-  });
-});
-
-/* Drawer do carrinho */
-const cartOverlay = document.getElementById('cart-overlay');
-const cartSheet   = document.getElementById('cart-sheet');
-
-function renderCart(){
-  const wrap  = document.getElementById('cart-items');
-  const empty = document.getElementById('cart-empty');
-  const footer= document.getElementById('cart-footer');
-  wrap.innerHTML = '';
-  if(cart.length === 0){
-    empty.classList.remove('hidden');
-    footer.classList.add('hidden');
-    return;
-  }
-  empty.classList.add('hidden');
-  footer.classList.remove('hidden');
-  let total = 0;
-  cart.forEach((item, i)=>{
-    total += item.price;
-    const isSub = item.type.startsWith('Assinatura');
-    wrap.insertAdjacentHTML('beforeend', `
-      <div class="flex items-center gap-3 bg-gray-50 rounded-2xl p-3">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:${isSub?'#e6fbf8':'#eef1f5'}">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${isSub?'#38b2ac':'#718096'}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="font-bold text-ink text-sm truncate">${item.name}</p>
-          <p class="text-[11px] ${isSub?'text-mint':'text-sub'} font-semibold">${item.type}</p>
-        </div>
-        <span class="font-extrabold text-ink text-sm">${fmtBRL(item.price)}</span>
-        <button onclick="removeItem(${i})" class="w-7 h-7 rounded-full bg-white flex items-center justify-center active:scale-90 transition shrink-0">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F6AD55" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>`);
-  });
-  document.getElementById('cart-total').textContent = fmtBRL(total);
-}
-
-function removeItem(i){ cart.splice(i,1); updateBadges(); renderCart(); }
-
-function openCart(){
-  renderCart();
-  cartOverlay.classList.remove('opacity-0','pointer-events-none');
-  requestAnimationFrame(()=> cartSheet.classList.remove('translate-y-full'));
-}
-function closeCart(){
-  cartSheet.classList.add('translate-y-full');
-  cartOverlay.classList.add('opacity-0');
-  setTimeout(()=> cartOverlay.classList.add('pointer-events-none'), 300);
-}
-function checkout(){
-  cart.length = 0;
-  updateBadges();
-  closeCart();
-  setTimeout(()=> toast('Pedido confirmado! Entrega a caminho 🐾'), 320);
-}
-cartOverlay.addEventListener('click', e=>{ if(e.target === cartOverlay) closeCart(); });
-
-/* ---------- Modal de agendamento ---------- */
-const schedOverlay = document.getElementById('sched-overlay');
-const schedSheet   = document.getElementById('sched-sheet');
-let selDate = null, selTime = null;
-
-document.querySelectorAll('.schedule-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=> openSchedule(btn.dataset.title));
-});
-
-function openSchedule(title){
-  document.getElementById('sched-title').textContent = title;
-  selDate = selTime = null;
-  document.querySelectorAll('#date-row .chip').forEach(c=>c.classList.remove('sel'));
-  document.querySelectorAll('#time-row .time').forEach(c=>c.classList.remove('sel'));
-  schedOverlay.classList.remove('opacity-0','pointer-events-none');
-  requestAnimationFrame(()=> schedSheet.classList.remove('translate-y-full'));
-}
-function closeSchedule(){
-  schedSheet.classList.add('translate-y-full');
-  schedOverlay.classList.add('opacity-0');
-  setTimeout(()=> schedOverlay.classList.add('pointer-events-none'), 300);
-}
-document.querySelectorAll('#date-row .chip').forEach(c=>{
-  c.addEventListener('click', ()=>{
-    document.querySelectorAll('#date-row .chip').forEach(x=>x.classList.remove('sel'));
-    c.classList.add('sel'); selDate = c.dataset.val;
-  });
-});
-document.querySelectorAll('#time-row .time').forEach(c=>{
-  c.addEventListener('click', ()=>{
-    document.querySelectorAll('#time-row .time').forEach(x=>x.classList.remove('sel'));
-    c.classList.add('sel'); selTime = c.dataset.val;
-  });
-});
-function confirmSchedule(){
-  if(!selDate || !selTime){ toast('Escolha a data e o horário'); return; }
-  closeSchedule();
-  setTimeout(()=> toast('Agendado: ' + selDate + ' às ' + selTime + ' ✅'), 320);
-}
-schedOverlay.addEventListener('click', e=>{ if(e.target === schedOverlay) closeSchedule(); });
-
-/* ---------- Chat rápido ---------- */
-function openChat(){ toast('Conectando você com a Dra. Marina 💬'); }
-
-/* ---------- Toast ---------- */
-let toastTimer;
-function toast(msg){
-  const t = document.getElementById('toast');
-  t.querySelector('div').textContent = msg;
-  t.style.opacity = '1';
-  t.style.transform = 'translateX(-50%) translateY(-6px)';
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>{
-    t.style.opacity = '0';
-    t.style.transform = 'translateX(-50%) translateY(0)';
-  }, 2200);
-}
-</script>
+</div><script src="js/script.js"></script>
 </body>
 </html>
